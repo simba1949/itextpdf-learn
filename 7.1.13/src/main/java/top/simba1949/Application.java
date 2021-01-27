@@ -12,6 +12,7 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.property.UnitValue;
 
 import java.io.File;
 import java.io.IOException;
@@ -64,6 +65,8 @@ public class Application {
     public static Table createTable() throws IOException {
         // 创建几列的表格对象
         Table table = new Table(4);
+        // 设置table表格宽度
+        table.setWidth(UnitValue.POINT).setWidth(520);
         for (int i = 0; i < 2; i++) {
             if (i == 0){
                 // 第一行数据，创建 Cell 对象，默认一行一列
@@ -71,13 +74,14 @@ public class Application {
                 cell00.add(new Paragraph("姓名").setFont(createPdfFont()));
                 table.addCell(cell00);
 
-                table.addCell(new Cell().add(new Paragraph("李白").setFont(createPdfFont())));
+                table.addCell(new Cell().add(new Paragraph("李白").setFont(createPdfFont()).setFontColor(ColorConstants.BLACK)));
 
-                table.addCell(new Cell().add(new Paragraph("性别").setFont(createPdfFont())));
+                table.addCell(new Cell().add(new Paragraph("性别").setFont(createPdfFont())).setFontSize(24));
                 table.addCell(new Cell().add(new Paragraph("男").setFont(createPdfFont())));
             }else if (i == 1){
                 // 第二行数据
                 table.addCell(new Cell().add(new Paragraph("代表作").setFont(createPdfFont())));
+                // 第二行数据，创建 Cell 对象，默认一行三列
                 table.addCell(new Cell(1, 3).add(new Paragraph("《将进酒》《蜀道难》").setFont(createPdfFont())));
             }
         }
@@ -99,16 +103,18 @@ public class Application {
         Paragraph paragraph = new Paragraph("段落内容");
         // 也可以通过添加 Text 对象添加文字
         paragraph.add(createText());
-        // 段落加粗
-        paragraph.setBold();
         // 段落设置字体
         paragraph.setFont(createPdfFont());
-        // 段落设置下划
-        paragraph.setUnderline();
+        // 段落加粗
+        paragraph.setBold();
+        // 段落设置字体大佬
+        paragraph.setFontSize(24);
         // 段落设置颜色
         paragraph.setFontColor(ColorConstants.RED);
-        // 首行缩进
-        paragraph.setFirstLineIndent(25);
+        // 段落设置下划
+        paragraph.setUnderline();
+        // 段落首行缩进
+        paragraph.setFirstLineIndent(40);
         // 设置段落对齐模式，对齐模式以段落对齐模式设置而显示
         paragraph.setTextAlignment(TextAlignment.CENTER);
 
@@ -129,15 +135,15 @@ public class Application {
         Text text = new Text("将进酒");
         // 字体
         text.setFont(createPdfFont());
-        // 加粗
+        // 字体加粗
         text.setBold();
         // 字体颜色
         text.setFontColor(ColorConstants.BLACK);
         // 字体大小
         text.setFontSize(24);
-        // 添加下划线
+        // 字体添加下划线
         text.setUnderline();
-        // 设置文本对齐模式
+        // 字体设置文本对齐模式
         text.setTextAlignment(TextAlignment.LEFT);
 
         return text;
